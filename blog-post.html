@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Məqalə — Codigma Academy Blog</title>
+<link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="./images/codigma.svg">
+
+<style>
+/* ── POST PAGE ── */
+.post-hero {
+  padding: 56px 48px 48px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.post-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: #2563eb;
+  margin-bottom: 28px; cursor: pointer;
+  background: #eff6ff; border: none;
+  padding: 8px 16px; border-radius: 8px;
+  transition: background 0.2s;
+}
+.post-back:hover { background: #dbeafe; }
+
+.post-category {
+  display: inline-block; font-size: 12px; font-weight: 700;
+  color: #2563eb; text-transform: uppercase; letter-spacing: 1px;
+  background: #dbeafe; padding: 4px 12px; border-radius: 20px;
+  margin-bottom: 16px;
+}
+.post-hero h1 {
+  font-size: 40px; font-weight: 800; color: #0f172a;
+  line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 20px;
+}
+.post-meta {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 14px; color: #64748b; flex-wrap: wrap;
+  padding-bottom: 28px; border-bottom: 1px solid #f1f5f9;
+}
+.post-author-chip {
+  display: flex; align-items: center; gap: 8px;
+}
+.post-author-av {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg,#dbeafe,#93c5fd);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.post-author-name { font-weight: 600; color: #0f172a; }
+.post-dot { color: #cbd5e1; }
+
+/* Cover */
+.post-cover {
+  max-width: 820px; margin: 0 auto 0;
+  padding: 0 48px;
+}
+.post-cover-inner {
+  height: 360px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 110px;
+}
+
+/* Body */
+.post-body {
+  max-width: 720px; margin: 0 auto;
+  padding: 48px 48px 0;
+  font-size: 17px; color: #374151; line-height: 1.85;
+}
+.post-body p { margin-bottom: 20px; }
+.post-body h2 {
+  font-size: 24px; font-weight: 800; color: #0f172a;
+  margin: 36px 0 14px; letter-spacing: -0.3px;
+}
+.post-body h3 {
+  font-size: 20px; font-weight: 700; color: #0f172a;
+  margin: 28px 0 12px;
+}
+.post-body ul, .post-body ol {
+  margin: 0 0 20px 24px;
+}
+.post-body li { margin-bottom: 8px; }
+.post-body strong { color: #0f172a; font-weight: 700; }
+.post-body pre {
+  background: #0f172a; color: #e2e8f0;
+  padding: 20px 24px; border-radius: 12px;
+  font-size: 14px; line-height: 1.7;
+  overflow-x: auto; margin: 20px 0 24px;
+  font-family: 'Courier New', monospace;
+}
+.post-body code {
+  background: #f1f5f9; color: #2563eb;
+  padding: 2px 7px; border-radius: 5px;
+  font-size: 15px; font-family: 'Courier New', monospace;
+}
+.post-body pre code {
+  background: none; color: inherit; padding: 0; font-size: 14px;
+}
+
+/* Share bar */
+.post-share {
+  max-width: 720px; margin: 40px auto 0;
+  padding: 28px 48px;
+  border-top: 1px solid #f1f5f9;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.post-share-label { font-size: 14px; font-weight: 700; color: #0f172a; }
+.share-btns { display: flex; gap: 10px; }
+.share-btn {
+  padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  border: 1.5px solid #e2e8f0; background: #fff; cursor: pointer; color: #374151;
+  transition: all 0.2s;
+}
+.share-btn:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+
+/* Related */
+.post-related {
+  background: #f8fafc;
+  padding: 56px 48px;
+  margin-top: 48px;
+}
+.post-related-inner { max-width: 820px; margin: 0 auto; }
+.post-related h2 { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 28px; }
+.related-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.related-card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+  overflow: hidden; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s;
+  text-decoration: none; display: block;
+}
+.related-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.related-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 38px; }
+.related-body { padding: 14px 16px; }
+.related-cat { font-size: 11px; font-weight: 700; color: #2563eb; text-transform: uppercase; margin-bottom: 5px; }
+.related-title { font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.4; }
+
+/* Not found */
+.post-notfound { text-align: center; padding: 100px 48px; }
+.post-notfound .icon { font-size: 64px; margin-bottom: 16px; }
+.post-notfound h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+.post-notfound p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="logo">
+    <img style="width: 100px;" src="/images/cdgma.png" alt="" srcset="">
+  </a>  
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/about/">Haqqımızda</a></li>
+    <li><a href="/courses/">Kurslar</a></li>
+    <li><a href="/reviews/">İcma</a></li>
+    <li><a href="/contact/">Əlaqə</a></li>
+    <li><a href="/blog/">Blog</a></li>
+  </ul>
+  <a href="/contact/" class="nav-cta">Konsultasiya Al</a>
+  
+  <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Dynamic content injected here -->
+<div id="postWrap"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-logo">Code<span>Nexus</span></div><p class="footer-desc">Praktiki, əlçatan və karyeraya yönlü IT proqramlaşdırma təlimləri.</p></div>
+      <div class="footer-col"><h4>Şirkət</h4><ul><li><a href="/about/">Haqqımızda</a></li><li><a href="/careers/">Karyera</a></li><li><a href="/reviews/">Rəylər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+      <div class="footer-col"><h4>Kurslar</h4><ul><li><a href="/courses/">Full-Stack</a></li><li><a href="/courses/">Python & AI</a></li><li><a href="/courses/">Cloud & DevOps</a></li></ul></div>
+      <div class="footer-col"><h4>Resurslar</h4><ul><li><a href="/blog/">Bloqlar</a></li><li><a href="#">Tədbirlər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Codigma Academy. Bütün hüquqlar qorunur.</p><p>Bakı, Azərbaycan</p></div>
+  </div>
+</footer>
+
+
+<script>
+/* ── Same DEFAULT_POSTS as blog.html ── */
+const DEFAULT_POSTS = [
+  {
+    id: 1, title: "Full-Stack Developer Olmaq: 6 Aylıq Yol Xəritəsi",
+    category: "Proqramlaşdırma", emoji: "🌐", author: "Elçin Məmmədov",
+    date: "15 Aprel 2025", readTime: "8 dəq", status: "published", bg: "#eff6ff",
+    excerpt: "Sıfırdan Full-Stack developer olmaq üçün hansı texnologiyaları, hansı sırada öyrənmək lazımdır? Ətraflı yol xəritəsi.",
+    content: `Full-Stack developer olmaq bu gün ən çox tələb olunan IT peşələrindən biridir. Lakin çoxları haradan başlayacağını bilmir. Bu məqalədə sıfırdan Full-Stack developer olmaq üçün 6 aylıq realist yol xəritəsini paylaşırıq.
+
+## 1-ci Ay: Veb-in Əsasları
+
+İlk olaraq HTML və CSS öyrənin. Bu iki texnologiya hər veb səhifənin bünövrəsidir. HTML-in semantik elementlərini mənimsəyin — header, nav, main, footer, article. CSS ilə isə Flexbox və Grid sistemlərini mütləq öyrənin, çünki müasir layout-ların 90%-i bu iki alətlə qurulur.
+
+**Hədəf:** Sadə, responsiv bir CV səhifəsi hazırlamaq.
+
+## 2-ci Ay: JavaScript Əsasları
+
+JavaScript — veb-in proqramlaşdırma dilidir. Dəyişənlər, funksiyalar, massivlər, obyektlər, DOM manipulyasiyası. Xüsusilə ES6+ sintaksisini öyrənin: arrow functions, destructuring, spread operator, async/await.
+
+**Hədəf:** JavaScript ilə interaktiv bir todo tətbiqi yazmaq.
+
+## 3-cü Ay: React Framework
+
+React bu gün ən populyar frontend kitabxanasıdır. Komponent arxitekturası, props, state, useEffect hook-u. Sonra React Router ilə çox səhifəli tətbiq qurun.
+
+**Hədəf:** React ilə kiçik bir e-ticarət interfeysi hazırlamaq.
+
+## 4-cü Ay: Node.js və Backend
+
+Frontend-i bitirdikdən sonra backend-ə keçin. Node.js + Express ilə REST API qurun. HTTP metodlarını, middleware konseptini, error handling-i öyrənin.
+
+**Hədəf:** CRUD əməliyyatları olan bir REST API yazmaq.
+
+## 5-ci Ay: Verilənlər Bazası
+
+PostgreSQL — relyasiya verilənlər bazasının sənaye standartıdır. SQL sorğularını, JOIN-ləri, indexləri öyrənin. Prisma ORM ilə Node.js-ə bağlayın.
+
+**Hədəf:** Real verilənlər bazası ilə işləyən tam bir backend hazırlamaq.
+
+## 6-cı Ay: Deployment və Portfolio
+
+Git/GitHub, Docker əsasları, Vercel/Railway-də deployment. Bu ayda keçmiş 5 ayın biliklərini birləşdirən TAM bir layihə hazırlayın — frontend + backend + database.
+
+**Nəticə:** 6 ayın sonunda işə müraciət edə biləcək səviyyədə Full-Stack developer olacaqsınız.`
+  },
+  {
+    id: 2, title: "Python ilə Data Science-ə Başlamaq: Praktiki Bələdçi",
+    category: "Proqramlaşdırma", emoji: "🐍", author: "Nərmin Əliyeva",
+    date: "10 Aprel 2025", readTime: "6 dəq", status: "published", bg: "#f0fdf4",
+    excerpt: "Pandas, NumPy və scikit-learn kitabxanaları ilə data analizi dünyasına ilk addımınızı atın.",
+    content: `Data Science — məlumatlardan dəyərli anlayışlar çıxarmaq sənətidir. Python bu sahənin ən güclü alətlərindən birini təklif edir. Bu bələdçidə başlanğıc üçün əsas addımları izah edirik.
+
+## Niyə Python?
+
+Python-un data science üçün seçilməsinin bir neçə səbəbi var: sadə sintaksis, güclü kitabxana ekosistemi, böyük icma dəstəyi. Pandas, NumPy, Matplotlib, scikit-learn — bu kitabxanalar Data Science-i mümkün edir.
+
+## NumPy ilə Başlayın
+
+NumPy — rəqəmsal hesablamalar üçün əsas kitabxanadır. N-ölçülü massivlər, riyazi əməliyyatlar, lineer cəbr. Data Science-in bünövrəsidir.
+
+## Pandas ilə Data Analizi
+
+Pandas — cədvəl şəklindəki məlumatlarla işləmək üçündür. CSV faylları oxumaq, süzmək, qruplaşdırmaq, birləşdirmək.
+
+## Matplotlib və Seaborn ilə Vizualizasiya
+
+Məlumatları görmək analizi asanlaşdırır. Bar chart, line plot, heatmap, scatter plot — hər biri fərqli anlayışı göstərir.
+
+## scikit-learn ilə Maşın Öyrənməsi
+
+Klassifikasiya, regression, klasterləşdirmə. scikit-learn bu alqoritmləri bir neçə sətir kodla tətbiq etməyə imkan verir.
+
+## Praktiki Layihə
+
+Başlamaq üçün Kaggle platformasında "Titanic" dataset-ini yükləyin. Bu real dataset üzərində bütün bu alətləri məşq edə bilərsiniz.`
+  },
+  {
+    id: 3, title: "AI Alətləri ilə Developer Produktivliyini 3× Artırın",
+    category: "Süni İntellekt", emoji: "🤖", author: "Rauf Hüseynov",
+    date: "5 Aprel 2025", readTime: "5 dəq", status: "published", bg: "#fdf4ff",
+    excerpt: "ChatGPT, GitHub Copilot, Cursor — bu alətlər gündəlik iş axışınızı necə dəyişdirə bilər?",
+    content: `Süni intellekt alətləri developer-lərin iş üsulunu kökündən dəyişdirir. Düzgün istifadə edilsə, günlük işinizi 3 dəfə sürətləndirmək mümkündür. Gəlin konkret alətlərə baxaq.
+
+## GitHub Copilot
+
+GitHub Copilot — kod yazarkən avtomatik tamamlama edir. Sadəcə bir şərh yazın, Copilot kodu yazsın. Repetitiv tapşırıqlar üçün inanılmaz dərəcədə faydalıdır.
+
+**Ən yaxşı istifadə halları:**
+- Boilerplate kod yazmaq
+- Test yazmaq
+- Dokumentasiya əlavə etmək
+- Tanış olmadığınız API-ları tez öyrənmək
+
+## Cursor IDE
+
+Cursor — AI ilə inteqrasiya olunmuş kod redaktorudur. VS Code-un bütün funksionallığına sahib olmaqla yanaşı, kodunuz haqqında sual verə, refactor edə, bug axtara bilərsiniz.
+
+**Əsas fərq:** GitHub Copilot bir fayl görür, Cursor isə bütün proyekti başa düşür.
+
+## ChatGPT / Claude — Kod Review Üçün
+
+Yazdığınız kodu AI-a göstərin, review istəyin. Potensial bug-ları, performans problemlərini, daha yaxşı yanaşmaları tapır.
+
+## Praktiki İpucları
+
+1. AI-a kontekst verin — konkret suallar soruşun
+2. AI çıxışını körü-körünə kopyalamayın — anlamadan istifadə etmək uzunmüddətdə zərərlidir
+3. Kod yazmaq üçün deyil, öyrənmək üçün də istifadə edin
+
+AI alətləri sizi əvəz etmir — sizi daha güclü edir.`
+  },
+  {
+    id: 4, title: "Ev Xanımından Mobile Developer-ə: Leylanın Hekayəsi",
+    category: "Uğur Hekayəsi", emoji: "📱", author: "Könül Qasımova",
+    date: "1 Aprel 2025", readTime: "4 dəq", status: "published", bg: "#fff7ed",
+    excerpt: "4 aylıq React Native kursu, bir iş müsahibəsi və yeni bir həyat. Leyla Mustafayevanın inanılmaz karyera hekayəsi.",
+    content: `Leyla Mustafayeva 34 yaşında iki uşaq anası idi. İT sahəsindən tamamilə uzaq bir həyat sürürdü. Lakin bir gecə oturub düşündü: "Nə vaxtacan eyni şeyi edəcəyəm?"
+
+## Başlanğıc
+
+"Əvvəllər heç bir proqramlaşdırma bilmirdim. Kompüterdə yalnız Word açardım," deyə Leyla gülümsəyir. Codigma Academy-un reklam banneri ona Instagram-da çıxdı. İlk öncə inanmadı — "Mən 34 yaşında nə developer olacağam?"
+
+Lakin pulsuz konsultasiyaya getdi. Karyera məsləhətçisi Könül xanım ona dedi: "Yaş heç vaxt mane deyil. Sadəcə qərar vermək lazımdır."
+
+## 4 Aylıq Səyahət
+
+React Native kursuna qeydiyyat oldu. İlk həftə çətin idi — JavaScript sintaksisi, komponent anlayışı, state management. Lakin dərs yoldaşları və mentorlar hər addımda yanında idi.
+
+"Uşaqlar yatandan sonra gecə saat 11-dən 1-ə kimi çalışırdım. Bəzən yorulurdum, lakin hər gün bir az daha irəli getdiyimi görürdüm."
+
+4 aylıq kursun sonunda Leyla tam işlək bir mobil tətbiq hazırlamışdı — alış-veriş siyahısı tətbiqi. Sadə, lakin real.
+
+## İlk İş Müsahibəsi
+
+Kursu bitirdikdən 3 həftə sonra AppStudio şirkətindən dəvət aldı. "Müsahibədə çox gərgin idim. Lakin portfolio-m vardı — real işlər."
+
+Müsahibədən 2 gün sonra zəng gəldi: "Sizi komandamızda görmək istəyirik."
+
+## Bu Gün
+
+Leyla bu gün AppStudio-da Junior Mobile Developer işləyir. Aylıq maaşı ₼ 2,800-dir.
+
+"Uşaqlarıma bir şey sübut etdim: həyatda heç bir şey gec deyil. Sadəcə başlamaq lazımdır."`
+  },
+  {
+    id: 5, title: "2025-ci İldə Ən Çox Axtarılan IT Peşələri",
+    category: "Karyera", emoji: "💼", author: "Könül Qasımova",
+    date: "28 Mart 2025", readTime: "7 dəq", status: "published", bg: "#f0fdfa",
+    excerpt: "Bazarın tələb etdiyi peşələr, maaş gözləntiləri və hansı bacarıqların sizi önə çıxaracağı haqqında.",
+    content: `IT bazarı sürətlə dəyişir. 2025-ci ildə hansı peşələrin ən çox tələb olunduğunu, ortalama maaşları və lazım olan bacarıqları araşdırdıq.
+
+## 1. AI/ML Mühəndisi
+
+Süni intellektin yüksəlişi ilə birlikdə bu peşə rekordu qırdı. Azərbaycanda ortalama maaş: ₼ 4,000–6,000.
+
+**Lazım olan bacarıqlar:** Python, TensorFlow/PyTorch, riyaziyyat, verilənlər bazası.
+
+## 2. Cloud / DevOps Mühəndisi
+
+Şirkətlər infrastrukturlarını buluda köçürür. AWS, Azure, GCP mütəxəssislərinə tələbat kəskin artıb.
+
+**Ortalama maaş:** ₼ 3,500–5,500
+
+## 3. Full-Stack Developer
+
+Hər iki tərəfi — frontend və backend — bilən developerlər kiçik şirkətlər üçün xüsusilə dəyərlidir.
+
+**Ortalama maaş:** ₼ 2,800–4,500
+
+## 4. Kibertəhlükəsizlik Mütəxəssisi
+
+Rəqəmsal hücumların artması ilə bu sahə boom yaşayır.
+
+**Ortalama maaş:** ₼ 3,000–5,000
+
+## 5. Data Analitiki
+
+Hər şirkətin məlumatlarını anlamağa ehtiyacı var. SQL bilən bir data analitik demək olar ki, istədiyi yerdə iş tapa bilər.
+
+**Ortalama maaş:** ₼ 2,500–4,000
+
+## Nəticə
+
+Hansı sahəni seçsəniz, ən vacib bacarıq — davamlı öyrənmə qabiliyyətidir.`
+  },
+  {
+    id: 6, title: "Docker və Kubernetes: DevOps-a Başlayanlar üçün",
+    category: "Texnologiya", emoji: "☁️", author: "Elçin Məmmədov",
+    date: "22 Mart 2025", readTime: "9 dəq", status: "published", bg: "#eff6ff",
+    excerpt: "Konteynerləşmə nədir, niyə vacibdir və sadə bir tətbiqi Docker ilə necə deploy etmək olar?",
+    content: `"Mənim kompüterimda işləyir" — developer-lərin ən məşhur bəhanəsi. Docker bu problemi həll edir. Gəlin Docker-ə sıfırdan baxaq.
+
+## Konteyner nədir?
+
+Konteyner — tətbiqinizi bütün asılılıqları ilə birlikdə paketləyən texnologiyadır. Sanki tətbiqinizi öz mini kompüterinə qoyursunuz.
+
+**Virtual maşından fərqi:** VM bütün əməliyyat sistemini simulyasiya edir (ağır). Konteyner isə yalnız tətbiq üçün lazım olanı götürür (yüngül, sürətli).
+
+## Docker-in Əsas Anlayışları
+
+**Image** — tətbiqin "fotoşəkli". Dəyişməzdir.
+**Container** — image-in işləyən nüsxəsi.
+**Dockerfile** — image-i necə quracağını təsvir edən fayl.
+**Docker Hub** — image-lərin paylaşıldığı yer.
+
+## İlk Dockerfile
+
+Sadə bir Node.js tətbiqini konteynerləşdirmək üçün Dockerfile yazırsınız, sonra build edib run edirsiniz. Bu qədər sadədir.
+
+## Kubernetes nədir?
+
+Bir konteyner Docker ilə idarə olunur. Yüzlərcə konteyner? Kubernetes lazımdır. Kubernetes — konteynerlerin orkestrasiya sistemidir: hansı konteyner harada işləsin, neçəsi olsun, biri çöksə nə olsun.
+
+## Haradan Başlamaq?
+
+1. Docker Desktop quraşdırın
+2. Rəsmi Docker tutorial-ını keçin
+3. Öz tətbiqinizi Dockerize edin
+4. Docker Compose ilə çox konteynerli sistem qurun
+5. Kubernetes-ə keçin (minikube ilə başlayın)
+
+DevOps yolu uzundur, lakin hər addım növbəti addımı asanlaşdırır.`
+  }
+];
+
+const BG_COLORS = { "🌐":"#eff6ff","🐍":"#f0fdf4","🤖":"#fdf4ff","📱":"#fff7ed","💼":"#f0fdfa","☁️":"#eff6ff","🎓":"#f0fdf4","💡":"#fdf4ff","🛡️":"#fef2f2","🗄️":"#f0fdfa","📊":"#fef9c3","🚀":"#fff7ed" };
+
+function getAllPosts() {
+  const saved = localStorage.getItem('cn_posts');
+  if (saved) { const p = JSON.parse(saved); if (p.length) return p; }
+  return DEFAULT_POSTS;
+}
+
+// Parse markdown-lite to HTML
+function parseContent(text) {
+  return text
+    .split('\n')
+    .map(line => {
+      if (line.startsWith('## '))  return `<h2>${line.slice(3)}</h2>`;
+      if (line.startsWith('### ')) return `<h3>${line.slice(4)}</h3>`;
+      if (line.startsWith('- '))   return `<li>${mdInline(line.slice(2))}</li>`;
+      if (/^\d+\.\s/.test(line))   return `<li>${mdInline(line.replace(/^\d+\.\s/,''))}</li>`;
+      if (line.startsWith('```'))  return line === '```' ? '</pre>' : `<pre><code>`;
+      if (line.trim() === '')      return '';
+      return `<p>${mdInline(line)}</p>`;
+    })
+    .join('\n')
+    .replace(/(<li>.*<\/li>\n?)+/g, match => `<ul>${match}</ul>`);
+}
+
+function mdInline(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+
+// ── Main render ──
+function render() {
+  const params = new URLSearchParams(window.location.search);
+  const id     = parseInt(params.get('id'));
+  const all    = getAllPosts();
+  const post   = all.find(p => p.id === id);
+  const wrap   = document.getElementById('postWrap');
+
+  if (!post) {
+    wrap.innerHTML = `
+      <div class="post-notfound">
+        <div class="icon">🔍</div>
+        <h2>Məqalə tapılmadı</h2>
+        <p>Bu məqalə mövcud deyil və ya silinib.</p>
+        <a href="/blog/" style="display:inline-block;background:#2563eb;color:#fff;padding:12px 28px;border-radius:8px;font-weight:700;font-size:14px;">← Bloqa Qayıt</a>
+      </div>`;
+    return;
+  }
+
+  document.title = `${post.title} — Codigma Academy Blog`;
+  const bg = post.bg || BG_COLORS[post.emoji] || '#f8fafc';
+
+  // Related posts (same category, excluding current)
+  const related = all
+    .filter(p => p.id !== post.id && p.status === 'published' && p.category === post.category)
+    .slice(0, 3);
+
+  // Fill with other posts if not enough
+  if (related.length < 3) {
+    all.filter(p => p.id !== post.id && p.status === 'published' && !related.find(r => r.id === p.id))
+       .slice(0, 3 - related.length)
+       .forEach(p => related.push(p));
+  }
+
+  const relatedHtml = related.map(r => `
+    <a class="related-card" href="blog-post.html?id=${r.id}">
+      <div class="related-img" style="background:${r.bg || BG_COLORS[r.emoji] || '#f8fafc'}">${r.emoji}</div>
+      <div class="related-body">
+        <div class="related-cat">${r.category}</div>
+        <div class="related-title">${r.title}</div>
+      </div>
+    </a>`).join('');
+
+  wrap.innerHTML = `
+    <div class="post-hero">
+      <button class="post-back" onclick="history.back()">← Geri</button>
+      <div class="post-category">${post.category}</div>
+      <h1>${post.title}</h1>
+      <div class="post-meta">
+        <div class="post-author-chip">
+          <div class="post-author-av">${post.emoji}</div>
+          <span class="post-author-name">${post.author}</span>
+        </div>
+        <span class="post-dot">·</span>
+        <span>${post.date}</span>
+        <span class="post-dot">·</span>
+        <span>⏱ ${post.readTime} oxuma</span>
+      </div>
+    </div>
+
+    <div class="post-cover">
+      <div class="post-cover-inner" style="background:${bg}">${post.emoji}</div>
+    </div>
+
+    <div class="post-body">
+      ${parseContent(post.content || post.excerpt)}
+    </div>
+
+    <div class="post-share">
+      <span class="post-share-label">Bu məqaləni paylaş</span>
+      <div class="share-btns">
+        <button class="share-btn" onclick="copyLink()">🔗 Link kopyala</button>
+        <button class="share-btn">💬 WhatsApp</button>
+        <button class="share-btn">💼 LinkedIn</button>
+      </div>
+    </div>
+
+    ${related.length ? `
+    <div class="post-related">
+      <div class="post-related-inner">
+        <h2>Digər Məqalələr</h2>
+        <div class="related-grid">${relatedHtml}</div>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.querySelector('.share-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Kopyalandı!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+render();
+
+// Mobile menu toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuBtn.classList.toggle('active');
+  });
+
+  // Close mobile menu when link is clicked
+  const navItems = navLinks.querySelectorAll('a');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      mobileMenuBtn.classList.remove('active');
+    });
+  });
+}
+</script>
+</body>
+</html>

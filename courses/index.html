@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurslar — Codigma Academy</title>
+<link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="./images/codigma.svg">
+
+</head>
+<body>
+ 
+<nav>
+  <a href="/" class="logo">
+    <img style="width: 100px;" src="/images/cdgma.png" alt="" srcset="">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/about/">Haqqımızda</a></li>
+    <li><a href="/courses/">Kurslar</a></li>
+    <li><a href="/reviews/">İcma</a></li>
+    <li><a href="/contact/">Əlaqə</a></li>
+    <li><a href="/blog/">Blog</a></li>
+  </ul>
+  <a href="/contact/" class="nav-cta">Konsultasiya Al</a>
+  
+  <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+ 
+<div class="page-hero courses-image">
+  <div class="label">Kurslar</div>
+  <h1>Karyeranı Dəyişdirəcək<br><em>IT Proqramları</em></h1>
+  <p>Sıfırdan ya da mövcud bacarıqlarını genişləndirərək sənayenin axtardığı developer ol.</p>
+</div>
+ 
+<div class="filter-bar">
+  <button class="filter-btn active">Hamısı</button>
+  <button class="filter-btn">Web Development</button>
+  <button class="filter-btn">Data & AI</button>
+  <button class="filter-btn">Cloud & DevOps</button>
+  <button class="filter-btn">Mobil</button>
+  <button class="filter-btn">Kibertəhlükəsizlik</button>
+</div>
+ 
+<div class="sec">
+  <div class="sec-label">Bütün Kurslar</div>
+  <h2 class="sec-title">Hər Səviyyə üçün Proqram</h2>
+  <div class="courses-grid-2">
+ 
+    <div class="course-big cb1">
+      <div class="course-thumb">🌐</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag t-blue">Başlanğıc → Orta</span><span class="ctag t-green">Ən Populyar</span></div>
+        <h3>Full-Stack Web Development</h3>
+        <p>HTML/CSS, JS, React, Node.js, PostgreSQL. Tam stack developer ol, portfolio hazırla.</p>
+        <div class="course-meta"><span>📅 6 ay</span><span>🕐 Həftədə 12 saat</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ 1,200</span>
+          <button class="enroll-btn" onclick="openEnroll('Full-Stack Web Development','🌐','#eff6ff','6 ay · ₼ 1,200')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="course-big cb2">
+      <div class="course-thumb">🐍</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag t-green">Başlanğıc → İrəli</span></div>
+        <h3>Python & Data Science</h3>
+        <p>Python, Pandas, NumPy, scikit-learn, ML əsasları. Data analyst ya da ML engineer ol.</p>
+        <div class="course-meta"><span>📅 5 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ 1,100</span>
+          <button class="enroll-btn" onclick="openEnroll('Python & Data Science','🐍','#f0fdf4','5 ay · ₼ 1,100')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="course-big cb3">
+      <div class="course-thumb">☁️</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag t-purple">Orta → İrəli</span></div>
+        <h3>Cloud & DevOps</h3>
+        <p>AWS, Docker, Kubernetes, CI/CD. Bulud infrastrukturu qur, AWS sertifikatı al.</p>
+        <div class="course-meta"><span>📅 4 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ 1,300</span>
+          <button class="enroll-btn" onclick="openEnroll('Cloud & DevOps','☁️','#eff6ff','4 ay · ₼ 1,300')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="course-big cb4">
+      <div class="course-thumb">📱</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag t-orange">Başlanğıc → Orta</span></div>
+        <h3>Mobil Tətbiq (React Native)</h3>
+        <p>iOS & Android üçün cross-platform tətbiq inkişaf etdir. App Store-da öz tətbiqin.</p>
+        <div class="course-meta"><span>📅 4 ay</span><span>🕐 Həftədə 8 saat</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ 950</span>
+          <button class="enroll-btn" onclick="openEnroll('Mobil Tətbiq (React Native)','📱','#fff7ed','4 ay · ₼ 950')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="course-big cb5">
+      <div class="course-thumb">🛡️</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag t-red">Başlanğıc → Orta</span></div>
+        <h3>Kibertəhlükəsizlik</h3>
+        <p>Etik hacking, penetrasyon testləri, network security. CompTIA Security+ hazırlığı.</p>
+        <div class="course-meta"><span>📅 5 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ 1,150</span>
+          <button class="enroll-btn" onclick="openEnroll('Kibertəhlükəsizlik','🛡️','#fef2f2','5 ay · ₼ 1,150')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="course-big cb6">
+      <div class="course-thumb">🗄️</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag t-teal">Başlanğıc → Orta</span></div>
+        <h3>Backend & Verilənlər Bazası</h3>
+        <p>SQL, PostgreSQL, MongoDB, REST API, mikroservislər. Güclü backend mühəndisi ol.</p>
+        <div class="course-meta"><span>📅 4 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ 1,000</span>
+          <button class="enroll-btn" onclick="openEnroll('Backend & Verilənlər Bazası','🗄️','#f0fdfa','4 ay · ₼ 1,000')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+ 
+<!-- HIGHLIGHT -->
+<div class="highlight-bg">
+  <div class="highlight-inner">
+    <div class="highlight-text">
+      <div class="sec-label">Bootcamp Modeli</div>
+      <h2>Niyə Ənənəvi Universitetdən Fərqlidir?</h2>
+      <p>Aylarla nəzəriyyə yox. Həftələr içində tətbiq edilə bilən bacarıqlar. Real mentor, real layihə, real nəticə.</p>
+      <div class="highlight-points">
+        <div class="hpoint"><div class="hpoint-icon">✅</div><p>Sənaye ekspertlərindən canlı dərslər</p></div>
+        <div class="hpoint"><div class="hpoint-icon">✅</div><p>GitHub portfolio — işdən əvvəl hazır</p></div>
+        <div class="hpoint"><div class="hpoint-icon">✅</div><p>Karyera dəstəyi və müsahibə hazırlığı</p></div>
+        <div class="hpoint"><div class="hpoint-icon">✅</div><p>Ömürlük icmaya giriş</p></div>
+      </div>
+      <a href="/contact/" class="highlight-btn">Pulsuz Konsultasiya Al</a>
+    </div>
+    <div class="highlight-card">
+      <div class="hc-title">📊 Proqram Statistikaları</div>
+      <div class="hc-items">
+        <div class="hc-item"><span>İşə düzəlmə faizi</span><strong>93%</strong></div>
+        <div class="hc-item"><span>Ortalama ilk maaş</span><strong>₼ 2,800+</strong></div>
+        <div class="hc-item"><span>Kurs bitirmə faizi</span><strong>91%</strong></div>
+        <div class="hc-item"><span>Məzun icması</span><strong>1,800+ nəfər</strong></div>
+        <div class="hc-item"><span>Tərəfdaş şirkətlər</span><strong>60+ şirkət</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- FAQ -->
+<div class="faq-bg">
+  <div class="faq-inner">
+    <h2 class="sec-title" style="text-align:center;margin-bottom:40px">Tez-tez Verilən Suallar</h2>
+    <div class="faq-item"><div class="faq-q">Kurslar üçün ön bilik tələb olunurmu? <span class="ic">+</span></div><div class="faq-a">Əksər kurslarımız sıfırdan başlayır. Full-Stack, Python və Mobil kursları üçün heç bir ön bilik tələb olunmur.</div></div>
+    <div class="faq-item"><div class="faq-q">Kurslar onlayn ya offline keçirilir? <span class="ic">+</span></div><div class="faq-a">Kurslarımız tam onlayn formatdadır. Canlı sessiyalar, qeydə alınmış dərslər və icma forumu vasitəsilə dəstək alırsınız.</div></div>
+    <div class="faq-item"><div class="faq-q">Sertifikat verilirmi? <span class="ic">+</span></div><div class="faq-a">Bəli, hər kurs tamamlandıqda Codigma Academy sertifikatı verilir. AWS, CompTIA kimi beynəlxalq sertifikatlar üçün də hazırlıq dəstəyi göstəririk.</div></div>
+    <div class="faq-item"><div class="faq-q">Ödəniş hissə-hissə edilə bilərmi? <span class="ic">+</span></div><div class="faq-a">Bəli. Hər kurs üçün aylıq taksit seçeneği mövcuddur. Ətraflı məlumat üçün bizimlə əlaqə saxlayın.</div></div>
+  </div>
+</div>
+ 
+<div class="cta-sec">
+  <h2>Hansı Kurs Sənin üçün Uyğundur?</h2>
+  <p>Pulsuz konsultasiya al, birlikdə qərara gələk.</p>
+  <a href="/contact/" class="btn-white">Pulsuz Məsləhət Al →</a>
+</div>
+ 
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-logo">Codigma<span>Academy</span></div><p class="footer-desc">Praktiki, əlçatan və karyeraya yönlü IT proqramlaşdırma təlimləri.</p></div>
+      <div class="footer-col"><h4>Şirkət</h4><ul><li><a href="/about/">Haqqımızda</a></li><li><a href="/careers/">Karyera</a></li><li><a href="/reviews/">Rəylər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+      <div class="footer-col"><h4>Kurslar</h4><ul><li><a href="/courses/">Full-Stack</a></li><li><a href="/courses/">Python & AI</a></li><li><a href="/courses/">Cloud & DevOps</a></li></ul></div>
+      <div class="footer-col"><h4>Resurslar</h4><ul><li><a href="/blog/">Bloqlar</a></li><li><a href="#">Tədbirlər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Codigma Academy. Bütün hüquqlar qorunur.</p><p>Bakı, Azərbaycan</p></div>
+  </div>
+</footer>
+ 
+<!-- ── ENROLL MODAL ── -->
+<div class="enroll-overlay" id="enrollOverlay" onclick="overlayClick(event)">
+  <div class="enroll-modal" id="enrollModal">
+ 
+    <div class="enroll-top">
+      <div class="enroll-course-info">
+        <div class="enroll-emoji" id="mEmoji"></div>
+        <div>
+          <div class="enroll-name" id="mName"></div>
+          <div class="enroll-meta" id="mMeta"></div>
+        </div>
+      </div>
+      <button class="enroll-close" onclick="closeEnroll()">✕</button>
+    </div>
+ 
+    <div class="enroll-divider"></div>
+ 
+    <!-- FORM -->
+    <div class="enroll-form" id="enrollForm">
+      <div class="ef-row">
+        <div class="ef">
+          <label>Ad *</label>
+          <input type="text" id="fName" placeholder="Adınız">
+        </div>
+        <div class="ef">
+          <label>Soyad *</label>
+          <input type="text" id="fSurname" placeholder="Soyadınız">
+        </div>
+      </div>
+      <div class="ef">
+        <label>E-poçt *</label>
+        <input type="email" id="fEmail" placeholder="email@example.com">
+      </div>
+      <div class="ef">
+        <label>Telefon</label>
+        <input type="tel" id="fPhone" placeholder="+994 XX XXX XX XX">
+      </div>
+      <div class="ef">
+        <label>Ödəniş üsulu</label>
+        <select id="fPayment">
+          <option value="">Seçin...</option>
+          <option>Tam ödəniş</option>
+          <option>3 aylıq taksit</option>
+          <option>6 aylıq taksit</option>
+          <option>12 aylıq taksit</option>
+        </select>
+      </div>
+    </div>
+ 
+    <div class="enroll-footer" id="enrollFooter">
+      <button class="enroll-submit" onclick="submitEnroll()">Qeydiyyatı Tamamla →</button>
+      <div class="enroll-note">🔒 Məlumatlarınız təhlükəsiz saxlanılır. 24 saat ərzində əlaqə saxlayacağıq.</div>
+    </div>
+ 
+    <!-- SUCCESS -->
+    <div class="enroll-success" id="enrollSuccess">
+      <div class="s-icon">🎉</div>
+      <h3>Qeydiyyat Tamamlandı!</h3>
+      <p>Tezliklə komandamız sizinlə əlaqə saxlayacaq.<br>Kursunuza uğurlar dilirik!</p>
+      <button onclick="closeEnroll()">Bağla</button>
+    </div>
+ 
+  </div>
+</div>
+ 
+<script>
+// Filter tabs
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+ 
+// Modal
+function openEnroll(name, emoji, bg, meta) {
+  document.getElementById('mName').textContent       = name;
+  document.getElementById('mEmoji').textContent      = emoji;
+  document.getElementById('mEmoji').style.background = bg;
+  document.getElementById('mMeta').textContent       = meta;
+ 
+  document.getElementById('enrollForm').style.display    = 'flex';
+  document.getElementById('enrollFooter').style.display  = 'flex';
+  document.getElementById('enrollSuccess').style.display = 'none';
+  ['fName','fSurname','fEmail','fPhone'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fPayment').value = '';
+ 
+  document.getElementById('enrollOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+ 
+function closeEnroll() {
+  document.getElementById('enrollOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+ 
+function overlayClick(e) {
+  if (e.target === document.getElementById('enrollOverlay')) closeEnroll();
+}
+ 
+function submitEnroll() {
+  const name  = document.getElementById('fName').value.trim();
+  const email = document.getElementById('fEmail').value.trim();
+  if (!name || !email) {
+    const m = document.getElementById('enrollModal');
+    m.style.animation = 'shake 0.35s ease';
+    setTimeout(() => m.style.animation = '', 400);
+    // highlight empty
+    if (!name)  document.getElementById('fName').style.borderColor  = '#dc2626';
+    if (!email) document.getElementById('fEmail').style.borderColor = '#dc2626';
+    ['fName','fEmail'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById(id).style.borderColor = '';
+      }, { once: true });
+    });
+    return;
+  }
+  document.getElementById('enrollForm').style.display    = 'none';
+  document.getElementById('enrollFooter').style.display  = 'none';
+  document.getElementById('enrollSuccess').style.display = 'block';
+}
+ 
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEnroll(); });
+
+// Mobile menu toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuBtn.classList.toggle('active');
+  });
+
+  // Close mobile menu when link is clicked
+  const navItems = navLinks.querySelectorAll('a');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      mobileMenuBtn.classList.remove('active');
+    });
+  });
+}
+</script>
+</body>
+</html>

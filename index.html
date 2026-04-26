@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<link rel="stylesheet" href="/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codigma Academy</title>
+    <link rel="icon" type="image/x-icon" href="./images/codigma.svg">
+
+</head>
+<body>
+
+<nav>
+    <a href="/" class="logo">
+    <img style="width: 100px;" src="/images/cdgma.png" alt="" srcset="">
+  </a>  
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/about/">Haqqımızda</a></li>
+    <li><a href="/courses/">Kurslar</a></li>
+    <li><a href="/reviews/">İcma</a></li>
+    <li><a href="/contact/">Əlaqə</a></li>
+    <li><a href="/blog/">Blog</a></li>
+  </ul>
+  <a href="/contact/" class="nav-cta">Konsultasiya Al</a>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+</nav>
+
+<div class="hero" id="hero">
+  <div class="slides-track" id="track">
+
+    <div class="slide slide-1 is-active">
+      <div class="slide-progress"><div class="slide-progress-fill" id="f0"></div></div>
+      <div class="slide-content">
+        <div class="slide-eyebrow"><span>Yeni Bacarıqlar</span><span class="dot">·</span><span>Yeni Düşüncə</span><span class="dot">·</span><span>Yeni Sən</span></div>
+        <h1>Karyeranı böyütmək üçün<br><em>IT Bootcamp</em>-lərlə bacarıq qazanın</h1>
+        <p>Peşəkar proqramlaşdırma kursları ilə düşüncənizi yeniləyin. Real layihələr, beynəlxalq sertifikatlar.</p>
+        <div class="slide-btns"><a href="#" class="btn-solid">Konsultasiya Al</a><a href="#" class="btn-ghost">Pulsuz Məsləhət</a></div>
+      </div>
+    </div>
+
+    <div class="slide slide-2">
+      <div class="slide-progress"><div class="slide-progress-fill" id="f1"></div></div>
+      <div class="slide-content">
+        <div class="slide-eyebrow"><span>Python</span><span class="dot">·</span><span>Data Science</span><span class="dot">·</span><span>Maşın Öyrənməsi</span></div>
+        <h1>Datanı gəlirə çevirmək üçün<br><em>Python & AI</em> öyrən</h1>
+        <p>Pandas, NumPy, scikit-learn, TensorFlow. Data analyst ya da ML engineer ol. Real dataset-lər üzərindən.</p>
+        <div class="slide-btns"><a href="#" class="btn-solid">Kursa Bax</a><a href="#" class="btn-ghost">Ətraflı Məlumat</a></div>
+      </div>
+    </div>
+
+    <div class="slide slide-3">
+      <div class="slide-progress"><div class="slide-progress-fill" id="f2"></div></div>
+      <div class="slide-content">
+        <div class="slide-eyebrow"><span>AWS</span><span class="dot">·</span><span>Docker</span><span class="dot">·</span><span>Kubernetes</span></div>
+        <h1>Bulud infrastrukturunu<br>idarə etməyi öyrən — <em>DevOps</em></h1>
+        <p>CI/CD pipeline-ları, konteynerləşmə, AWS sertifikatı. Müasir texnologiyanın önündə ol.</p>
+        <div class="slide-btns"><a href="#" class="btn-solid">Kursa Bax</a><a href="#" class="btn-ghost">Pulsuz Məsləhət</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="hero-arrow prev" id="btnPrev">&#8592;</button>
+  <button class="hero-arrow next" id="btnNext">&#8594;</button>
+
+  <div class="hero-dots" id="dots">
+    <button class="active" data-i="0"></button>
+    <button data-i="1"></button>
+    <button data-i="2"></button>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-label">Məzunlarımız bu şirkətlərdə çalışır</div>
+  <div class="trust-logos">
+    <span class="trust-logo">Kapital Bank</span>
+    <span class="trust-logo">PASHA Holding</span>
+    <span class="trust-logo">ABB</span>
+    <span class="trust-logo">Bakcell</span>
+    <span class="trust-logo">Azercell</span>
+    <span class="trust-logo">SOCAR</span>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">1,800+</div><div class="stat-label">Məzun Developer</div></div>
+  <div class="stat"><div class="stat-num">93%</div><div class="stat-label">İşə Düzəlmə Faizi</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">İxtisaslaşmış Kurs</div></div>
+  <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Ekspert Müəllim</div></div>
+</div>
+
+<div class="who">
+  <div class="who-img">
+    <div class="who-badge"><div class="num">2020</div><div class="txt">-cı ildən<br>fəaliyyətdəyik</div></div>
+  </div>
+  <div>
+    <div class="sec-label">Biz kimik</div>
+    <h2 class="sec-title">Praktiki, Əlçatan,<br>Karyeraya Yönlü IT Təlimləri</h2>
+    <p class="sec-sub">Real layihələr üzərindən öyrənərək sənaye standartlarına uyğun developer kimi yetişirsən.</p>
+    <div class="who-features">
+      <div class="wf"><div class="wf-icon">🎯</div><div><h4>Real Layihə Yanaşması</h4><p>Hər kurs real iş mühitini simulyasiya edir.</p></div></div>
+      <div class="wf"><div class="wf-icon">🛠️</div><div><h4>Praktikadan Öyrən</h4><p>Hands-on tapşırıqlar, code review, GitHub portfolio.</p></div></div>
+      <div class="wf"><div class="wf-icon">🤝</div><div><h4>İcma Dəstəyi</h4><p>1000+ üzvlü developer icması, mentor şəbəkəsi.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="for-section">
+  <div class="for-inner">
+    <div class="sec-label" style="color:#60a5fa">Kim üçündür</div>
+    <h2 class="sec-title" style="color:#fff">Hər Səviyyədən Şəxs üçün Proqramlar</h2>
+    <div class="for-grid">
+      <div class="for-card"><span class="for-card-icon">🚀</span><h3>Sıfırdan Başlayanlar</h3><p>Heç bir ön bilik tələb olunmur. Əsaslardan peşəkar developer səviyyəsinə.</p></div>
+      <div class="for-card"><span class="for-card-icon">📈</span><h3>Karyerasını Böyüdənlər</h3><p>Mövcud bacarıqlarını genişləndir, maaşını artır, senior səviyyəyə keç.</p></div>
+      <div class="for-card"><span class="for-card-icon">👩‍💻</span><h3>Qadınlar IT-də</h3><p>Xüsusi icmamıza qoşul. Mentorluq, şəbəkə, karyera dəstəyi.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="courses-bg">
+  <div class="courses-inner">
+    <div class="courses-head">
+      <div>
+        <div class="sec-label">Kurslar</div>
+        <h2 class="sec-title" style="margin-bottom:0">IT Bacarıqlarını Artır,<br>Beynəlxalq Sertifikat Al</h2>
+      </div>
+      <a href="#" class="view-all">Bütün kurslara bax →</a>
+    </div>
+    <div class="courses-grid">
+      <div class="c-card cc1"><div class="c-card-top">🌐</div><div class="c-card-body"><h3>Full-Stack Web Development</h3><p>HTML/CSS-dən React, Node.js-ə qədər tam stack developer ol.</p><div class="c-card-footer"><span class="c-pill">JS · React · Node</span><a href="#" class="c-link">Ətraflı →</a></div></div></div>
+      <div class="c-card cc2"><div class="c-card-top">🐍</div><div class="c-card-body"><h3>Python & Data Science</h3><p>Python, Pandas, scikit-learn ilə data analyst ya da ML engineer ol.</p><div class="c-card-footer"><span class="c-pill">Python · ML · AI</span><a href="#" class="c-link">Ətraflı →</a></div></div></div>
+      <div class="c-card cc3"><div class="c-card-top">☁️</div><div class="c-card-body"><h3>Cloud & DevOps</h3><p>AWS, Docker, Kubernetes. Bulud infrastrukturu qur, sertifikat al.</p><div class="c-card-footer"><span class="c-pill">AWS · Docker · K8s</span><a href="#" class="c-link">Ətraflı →</a></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-sec">
+  <h2>Karyeranı Dəyişməyə Hazırsan?</h2>
+  <p>Yeni rol deyil — yeni sən. Bu gün pulsuz konsultasiya al.</p>
+  <a href="#" class="btn-white">Pulsuz Konsultasiya Al</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-logo">Code<span>Nexus</span></div><p class="footer-desc">Praktiki, əlçatan və karyeraya yönlü IT proqramlaşdırma təlimləri.</p></div>
+      <div class="footer-col"><h4>Şirkət</h4><ul><li><a href="/about/">Haqqımızda</a></li><li><a href="/careers/">Karyera</a></li><li><a href="/reviews/">Rəylər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+      <div class="footer-col"><h4>Kurslar</h4><ul><li><a href="/courses/">Full-Stack</a></li><li><a href="/courses/">Python & AI</a></li><li><a href="/courses/">Cloud & DevOps</a></li></ul></div>
+      <div class="footer-col"><h4>Resurslar</h4><ul><li><a href="/blog/">Bloqlar</a></li><li><a href="#">Tədbirlər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Codigma Academy. Bütün hüquqlar qorunur.</p><p>Bakı, Azərbaycan</p></div>
+  </div>
+</footer>
+
+<script>
+const TOTAL = 3;
+const INTERVAL = 5000;
+let cur = 0, timer = null;
+
+const track  = document.getElementById('track');
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('#dots button');
+const fills  = [document.getElementById('f0'), document.getElementById('f1'), document.getElementById('f2')];
+
+function stopFill(i) {
+  fills[i].style.transition = 'none';
+  fills[i].style.width = '0%';
+}
+function startFill(i) {
+  fills[i].getBoundingClientRect(); // reflow
+  fills[i].style.transition = `width ${INTERVAL}ms linear`;
+  fills[i].style.width = '100%';
+}
+
+function goTo(idx) {
+  slides[cur].classList.remove('is-active');
+  dots[cur].classList.remove('active');
+  stopFill(cur);
+
+  cur = (idx + TOTAL) % TOTAL;
+
+  track.style.transform = `translateX(-${cur * 100}%)`;
+  slides[cur].classList.add('is-active');
+  dots[cur].classList.add('active');
+  startFill(cur);
+
+  clearInterval(timer);
+  timer = setInterval(() => goTo(cur + 1), INTERVAL);
+}
+
+document.getElementById('btnPrev').onclick = () => goTo(cur - 1);
+document.getElementById('btnNext').onclick = () => goTo(cur + 1);
+dots.forEach(b => b.addEventListener('click', () => goTo(+b.dataset.i)));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  goTo(cur - 1);
+  if (e.key === 'ArrowRight') goTo(cur + 1);
+});
+
+let tx = 0;
+document.getElementById('hero').addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+document.getElementById('hero').addEventListener('touchend',   e => {
+  const d = tx - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 40) goTo(d > 0 ? cur + 1 : cur - 1);
+});
+
+// init
+startFill(0);
+timer = setInterval(() => goTo(cur + 1), INTERVAL);
+
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuBtn.classList.toggle('active');
+  });
+
+  // Close mobile menu when link is clicked
+  const navItems = navLinks.querySelectorAll('a');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      mobileMenuBtn.classList.remove('active');
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="az">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="/styles.css">
+    <link rel="icon" type="image/x-icon" href="./images/codigma.svg">
+
+<script>
+function selectChip(el){
+  document.querySelectorAll('.t-chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function submitForm(){
+  const btn=document.querySelector('.submit-btn');
+  btn.textContent='✅ Göndərildi!';
+  btn.style.background='#059669';
+  setTimeout(()=>{btn.textContent='Göndər';btn.style.background='#2563eb'},3000);
+}
+</script>
+</head><body>
+
+<nav>
+  <a href="/" class="logo">
+    <img style="width: 100px;" src="/images/cdgma.png" alt="" srcset="">
+  </a>   
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/about/">Haqqımızda</a></li>
+    <li><a href="/courses/">Kurslar</a></li>
+    <li><a href="/reviews/">İcma</a></li>
+    <li><a href="/contact/">Əlaqə</a></li>
+    <li><a href="/blog/">Blog</a></li>
+  </ul>
+  <a href="/contact/" class="nav-cta">Konsultasiya Al</a>
+  
+  <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<div class="page-hero contact-image">
+  <div class="hero-label">Əlaqə</div>
+  <h1>Bizimlə <em>Əlaqə</em> Saxla<br>Sualının Cavabını Al</h1>
+  <p>Kurs seçimi, qeydiyyat ya da hər hansı sual üçün komandamız hazırdır.</p>
+</div>
+
+<div class="contact-main">
+  <!-- LEFT -->
+  <div class="contact-info">
+    <div class="sec-label">Əlaqə Məlumatları</div>
+    <h2>Sizi Eşitməkdən Məmnunuq</h2>
+    <p>Kurs seçimindən işə qəbula qədər hər mərhələdə yanınızdayıq. Yazın, zəng edin ya da gəlin.</p>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div><h4>Ünvan</h4><p>Nizami küçəsi 65, Bakı, Azərbaycan AZ1010</p></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        <div><h4>Telefon</h4><p><a href="tel:+994501234567">+994 50 123 45 67</a></p></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">✉️</div>
+        <div><h4>E-poçt</h4><p><a href="mailto:hello@codigmaacademy.az">hello@codigmaacademy.az</a></p></div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🕐</div>
+        <div><h4>İş Saatları</h4><p>B.e. – Cümə: 09:00 – 19:00<br>Şənbə: 10:00 – 15:00</p></div>
+      </div>
+    </div>
+    <div class="socials">
+      <h4>Sosial Şəbəkələr</h4>
+      <div class="social-links">
+        <a class="s-link" href="#">💬</a>
+        <a class="s-link" href="#">📸</a>
+        <a class="s-link" href="#">💼</a>
+        <a class="s-link" href="#">▶️</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="contact-form">
+    <div class="form-title">Mesaj Göndər</div>
+    <div class="form-sub">24 saat ərzində cavab veririk.</div>
+
+    <div style="margin-bottom:20px">
+      <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:10px">Mövzu seçin</div>
+      <div class="topic-chips">
+        <span class="t-chip sel" onclick="selectChip(this)">Kurs məlumatı</span>
+        <span class="t-chip" onclick="selectChip(this)">Qeydiyyat</span>
+        <span class="t-chip" onclick="selectChip(this)">Ödəniş</span>
+        <span class="t-chip" onclick="selectChip(this)">Tərəfdaşlıq</span>
+        <span class="t-chip" onclick="selectChip(this)">Digər</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0"><label>Ad *</label><input type="text" placeholder="Adınız"></div>
+      <div class="form-group" style="margin-bottom:0"><label>Soyad *</label><input type="text" placeholder="Soyadınız"></div>
+    </div>
+    <div class="form-row" style="margin-top:16px">
+      <div class="form-group" style="margin-bottom:0"><label>E-poçt *</label><input type="email" placeholder="email@example.com"></div>
+      <div class="form-group" style="margin-bottom:0"><label>Telefon</label><input type="tel" placeholder="+994 XX XXX XX XX"></div>
+    </div>
+    <div class="form-group" style="margin-top:16px">
+      <label>Maraqlandığınız kurs</label>
+      <select>
+        <option value="">Seçin...</option>
+        <option>Full-Stack Web Development</option>
+        <option>Python & Data Science</option>
+        <option>Cloud & DevOps</option>
+        <option>Mobil Tətbiq</option>
+        <option>Kibertəhlükəsizlik</option>
+        <option>Backend & Verilənlər Bazası</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mesajınız *</label>
+      <textarea placeholder="Sualınızı buraya yazın..."></textarea>
+    </div>
+    <button class="submit-btn" onclick="submitForm()">Göndər →</button>
+    <div class="form-note">Məlumatlarınız heç vaxt üçüncü şəxslərlə paylaşılmır.</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-strip">
+  <div class="faq-inner">
+    <h2>Tez-tez Verilən Suallar</h2>
+    <div class="faq-item"><div class="faq-q">Pulsuz konsultasiya necə alıram? <span class="ic">+</span></div><div class="faq-a">Yuxarıdakı formu doldurun ya da birbaşa bizə zəng edin. Komandamız 24 saat ərzində sizinlə əlaqə saxlayacaq.</div></div>
+    <div class="faq-item"><div class="faq-q">Kurslar onlayn keçirilirmi? <span class="ic">+</span></div><div class="faq-a">Bəli, bütün kurslarımız tam onlayn formatdadır. Zoom vasitəsilə canlı dərslər, Slack icması və qeydə alınmış materiallar.</div></div>
+    <div class="faq-item"><div class="faq-q">Taksit imkanı varmı? <span class="ic">+</span></div><div class="faq-a">Bəli. Hər kurs üçün 3-12 aylıq taksit seçeneği mövcuddur. Ətraflı məlumat üçün bizimlə əlaqə saxlayın.</div></div>
+    <div class="faq-item"><div class="faq-q">Korporativ təlimlər təklif edirsinizmi? <span class="ic">+</span></div><div class="faq-a">Bəli. Şirkətlər üçün xüsusi korporativ proqramlarımız mövcuddur. Bizə yazın, tərəfdaşlıq haqqında danışaq.</div></div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="map-sec">
+  <div class="map-inner">
+    <div class="map-box">
+      <div class="pin">📍</div>
+      <p>Nizami küçəsi 65, Bakı</p>
+    </div>
+    <div class="map-text">
+      <h2>Ofisimizə Gəlin</h2>
+      <p>Pulsuz konsultasiya üçün ofisimizə gəlməyə xoş gəlmisiniz. Qabaqcadan zaman ayırmanızı tövsiyə edirik.</p>
+      <div class="addr">
+        📍 Nizami küçəsi 65, Bakı AZ1010<br>
+        🚇 Metro: 28 May stansiyası (5 dəq)<br>
+        🅿️ Pulsuz parklanma mövcuddur
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-sec">
+  <h2>Hazırsan? İlk Addımı At.</h2>
+  <p>Pulsuz konsultasiya al — 30 dəqiqə, heç bir öhdəlik yoxdur.</p>
+  <a href="#" class="btn-white">Konsultasiya Al →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div><div class="footer-logo">Codigma<span>Academy</span></div><p class="footer-desc">Praktiki, əlçatan və karyeraya yönlü IT proqramlaşdırma təlimləri.</p></div>
+      <div class="footer-col"><h4>Şirkət</h4><ul><li><a href="/about/">Haqqımızda</a></li><li><a href="/careers/">Karyera</a></li><li><a href="/reviews/">Rəylər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+      <div class="footer-col"><h4>Kurslar</h4><ul><li><a href="/courses/">Full-Stack</a></li><li><a href="/courses/">Python & AI</a></li><li><a href="/courses/">Cloud & DevOps</a></li></ul></div>
+      <div class="footer-col"><h4>Resurslar</h4><ul><li><a href="/blog/">Bloqlar</a></li><li><a href="#">Tədbirlər</a></li><li><a href="/contact/">Əlaqə</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Codigma Academy. Bütün hüquqlar qorunur.</p><p>Bakı, Azərbaycan</p></div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuBtn.classList.toggle('active');
+  });
+
+  // Close mobile menu when link is clicked
+  const navItems = navLinks.querySelectorAll('a');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      mobileMenuBtn.classList.remove('active');
+    });
+  });
+}
+</script>
+</body></html>

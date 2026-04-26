@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Codigma Academy Blog</title>
+<link rel="stylesheet" href="/admin.css">
+    <link rel="icon" type="image/x-icon" href="./images/codigma.svg">
+
+<style>
+  body { margin:0; }
+  .admin-body { background:#f1f5f9; min-height:100vh; }
+</style>
+</head>
+<body class="admin-body">
+
+<!-- ADMIN NAV -->
+<nav class="admin-nav">
+  <a href="/" class="logo">
+    <img style="width: 100px;" src="/images/cdgma.png" alt="" srcset="">
+  </a>  <div class="admin-nav-right">
+    <a href="/blog/" target="_blank">🔗 Bloqu Gör</a>
+    <a href="/index.html" target="_blank">Sayta Qayıt</a>
+    <span class="admin-badge">Admin</span>
+  </div>
+</nav>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Əsas</div>
+      <button class="sidebar-link active" onclick="showTab('posts')">
+        <span class="s-icon">📝</span> Məqalələr
+        <span class="s-count" id="sideCountAll">0</span>
+      </button>
+      <button class="sidebar-link" onclick="showTab('new')">
+        <span class="s-icon">➕</span> Yeni Məqalə
+      </button>
+    </div>
+    <div class="sidebar-section" style="margin-top:16px">
+      <div class="sidebar-label">Filtr</div>
+      <button class="sidebar-link" onclick="filterSidebar('published')">
+        <span class="s-icon">✅</span> Yayımlanmış
+        <span class="s-count" id="sideCountPub">0</span>
+      </button>
+      <button class="sidebar-link" onclick="filterSidebar('draft')">
+        <span class="s-icon">📄</span> Qaralama
+        <span class="s-count" id="sideCountDraft">0</span>
+      </button>
+    </div>
+    <div class="sidebar-section" style="margin-top:16px">
+      <div class="sidebar-label">Kateqoriyalar</div>
+      <button class="sidebar-link" onclick="filterCat('Karyera')"><span class="s-icon">💼</span> Karyera</button>
+      <button class="sidebar-link" onclick="filterCat('Süni İntellekt')"><span class="s-icon">🤖</span> Süni İntellekt</button>
+      <button class="sidebar-link" onclick="filterCat('Proqramlaşdırma')"><span class="s-icon">💻</span> Proqramlaşdırma</button>
+      <button class="sidebar-link" onclick="filterCat('Uğur Hekayəsi')"><span class="s-icon">⭐</span> Uğur Hekayəsi</button>
+      <button class="sidebar-link" onclick="filterCat('Texnologiya')"><span class="s-icon">⚙️</span> Texnologiya</button>
+    </div>
+    <div class="sidebar-section" style="margin-top:24px;padding:0 16px">
+      <button onclick="resetToDefaults()" style="width:100%;padding:10px;border-radius:8px;border:1px solid #fecaca;background:#fff1f2;color:#dc2626;font-size:13px;font-weight:600;cursor:pointer;">
+        🔄 Varsayılana Sıfırla
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+
+    <!-- STATS -->
+    <div class="admin-stats" id="statsRow">
+      <div class="admin-stat-card"><div class="asc-label">📝 Ümumi Məqalə</div><div class="asc-num" id="statTotal">0</div><div class="asc-change">Cəmi</div></div>
+      <div class="admin-stat-card"><div class="asc-label">✅ Yayımlanmış</div><div class="asc-num" id="statPub">0</div><div class="asc-change">Aktiv</div></div>
+      <div class="admin-stat-card"><div class="asc-label">📄 Qaralama</div><div class="asc-num" id="statDraft">0</div><div class="asc-change">Gözləyir</div></div>
+      <div class="admin-stat-card"><div class="asc-label">🗂 Kateqoriya</div><div class="asc-num" id="statCats">0</div><div class="asc-change">Unikal</div></div>
+    </div>
+
+    <!-- POSTS TABLE -->
+    <div id="tabPosts">
+      <div class="admin-topbar">
+        <div>
+          <h1 id="tableTitle">Bütün Məqalələr</h1>
+          <p id="tableSubtitle">Blog məqalələrini idarə et</p>
+        </div>
+        <button class="btn-new" onclick="openModal()">➕ Yeni Məqalə</button>
+      </div>
+
+      <div class="admin-table-wrap">
+        <div class="admin-table-header">
+          <h2 id="tableHeading">Məqalələr</h2>
+          <input class="admin-search" id="adminSearch" type="text" placeholder="Axtar..." oninput="renderTable()">
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Məqalə</th>
+                <th>Kateqoriya</th>
+                <th>Müəllif</th>
+                <th>Tarix</th>
+                <th>Status</th>
+                <th>Əməliyyatlar</th>
+              </tr>
+            </thead>
+            <tbody id="postsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW POST FORM (inline) -->
+    <div id="tabNew" style="display:none">
+      <div class="admin-topbar">
+        <div>
+          <h1>Yeni Məqalə</h1>
+          <p>Blog üçün yeni məqalə yaz</p>
+        </div>
+        <button class="btn-new" style="background:#64748b" onclick="showTab('posts')">← Geri Qayıt</button>
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:36px;max-width:800px">
+        <div id="inlineForm"></div>
+        <div style="display:flex;gap:10px;margin-top:24px;justify-content:flex-end;border-top:1px solid #f1f5f9;padding-top:20px">
+          <button class="btn-cancel" onclick="showTab('posts')">İmtina</button>
+          <button class="btn-save" onclick="saveInlineForm('draft')">📄 Qaralama Saxla</button>
+          <button class="btn-publish" onclick="saveInlineForm('published')">✅ Yayımla</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL (edit) -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Məqaləni Redaktə Et</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">İmtina</button>
+      <button class="btn-save" onclick="saveModal('draft')">📄 Qaralama</button>
+      <button class="btn-publish" onclick="saveModal('published')">✅ Yayımla</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM -->
+<div class="modal-overlay" id="delOverlay" onclick="closeDelOutside(event)">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <h2>Məqaləni Sil</h2>
+      <button class="modal-close" onclick="closeDel()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:15px;color:#64748b;line-height:1.6">Bu məqaləni silmək istədiyinizə əminsiniz? Bu əməliyyat geri alına bilməz.</p>
+      <div id="delPostTitle" style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 16px;margin-top:14px;font-size:14px;font-weight:600;color:#dc2626"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeDel()">İmtina</button>
+      <button class="action-btn btn-del" style="padding:11px 22px;font-size:14px" onclick="confirmDelete()">🗑 Sil</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Data ──
+const DEFAULT_POSTS = [
+  { id:1, title:"Full-Stack Developer Olmaq: 6 Aylıq Yol Xəritəsi", category:"Proqramlaşdırma", excerpt:"Sıfırdan Full-Stack developer olmaq üçün hansı texnologiyaları, hansı sırada öyrənmək lazımdır? Ətraflı yol xəritəsi.", content:"Bu məqalədə sıfırdan Full-Stack developer olmaq üçün 6 aylıq detallı yol xəritəsi təqdim edirik. HTML/CSS-dən başlayaraq JavaScript, React, Node.js, PostgreSQL-ə qədər hər mərhələni izah edirik.", emoji:"🌐", author:"Elçin Məmmədov", date:"15 Aprel 2025", readTime:"8 dəq", status:"published", bg:"#eff6ff" },
+  { id:2, title:"Python ilə Data Science-ə Başlamaq: Praktiki Bələdçi", category:"Proqramlaşdırma", excerpt:"Pandas, NumPy və scikit-learn kitabxanaları ilə data analizi dünyasına ilk addımınızı atın.", content:"Python proqramlaşdırma dilini öyrəndikdən sonra data science dünyasına keçid etmək üçün bu bələdçi sizə kömək edəcək.", emoji:"🐍", author:"Nərmin Əliyeva", date:"10 Aprel 2025", readTime:"6 dəq", status:"published", bg:"#f0fdf4" },
+  { id:3, title:"AI Alətləri ilə Developer Produktivliyini 3× Artırın", category:"Süni İntellekt", excerpt:"ChatGPT, GitHub Copilot, Cursor — bu alətlər gündəlik iş axışınızı necə dəyişdirə bilər?", content:"Süni intellekt alətlərindən düzgün istifadə etmək developer-lərin produktivliyini əhəmiyyətli dərəcədə artıra bilər.", emoji:"🤖", author:"Rauf Hüseynov", date:"5 Aprel 2025", readTime:"5 dəq", status:"published", bg:"#fdf4ff" },
+  { id:4, title:"Ev Xanımından Mobile Developer-ə: Leylanın Hekayəsi", category:"Uğur Hekayəsi", excerpt:"4 aylıq React Native kursu, bir iş müsahibəsi və yeni bir həyat.", content:"Leyla Mustafayevanın inanılmaz karyera hekayəsi — ev xanımından mobil tətbiq developeri olmağın yolu.", emoji:"📱", author:"Könül Qasımova", date:"1 Aprel 2025", readTime:"4 dəq", status:"published", bg:"#fff7ed" },
+  { id:5, title:"2025-ci İldə Ən Çox Axtarılan IT Peşələri", category:"Karyera", excerpt:"Bazarın tələb etdiyi peşələr, maaş gözləntiləri və hansı bacarıqların sizi önə çıxaracağı haqqında.", content:"2025-ci ildə IT bazarında ən çox tələb olunan peşələr, ortalama maaşlar və tələb olunan bacarıqlar.", emoji:"💼", author:"Könül Qasımova", date:"28 Mart 2025", readTime:"7 dəq", status:"published", bg:"#f0fdfa" },
+  { id:6, title:"Docker və Kubernetes: DevOps-a Başlayanlar üçün", category:"Texnologiya", excerpt:"Konteynerləşmə nədir, niyə vacibdir və sadə bir tətbiqi Docker ilə necə deploy etmək olar?", content:"Docker konteynerləri, Kubernetes orkestrasyonu və CI/CD pipeline-ları haqqında başlanğıc səviyyəli bələdçi.", emoji:"☁️", author:"Elçin Məmmədov", date:"22 Mart 2025", readTime:"9 dəq", status:"published", bg:"#eff6ff" },
+];
+
+const BG_MAP = { "🌐":"#eff6ff","🐍":"#f0fdf4","🤖":"#fdf4ff","📱":"#fff7ed","💼":"#f0fdfa","☁️":"#eff6ff","🎓":"#f0fdf4","💡":"#fdf4ff","🛡️":"#fef2f2","🗄️":"#f0fdfa","📊":"#fef9c3","🚀":"#fff7ed","⭐":"#fef9c3","🔥":"#fff7ed" };
+const EMOJIS = ["🌐","🐍","🤖","📱","💼","☁️","🎓","💡","🛡️","🗄️","📊","🚀","⭐","🔥"];
+const CATS   = ["Karyera","Süni İntellekt","Proqramlaşdırma","Uğur Hekayəsi","Texnologiya"];
+
+let sidebarFilter = 'all';
+let sidebarCat    = '';
+let editingId     = null;
+let deletingId    = null;
+
+// ── Storage ──
+function getPosts() {
+  const s = localStorage.getItem('cn_posts');
+  return s ? JSON.parse(s) : JSON.parse(JSON.stringify(DEFAULT_POSTS));
+}
+function savePosts(posts) {
+  localStorage.setItem('cn_posts', JSON.stringify(posts));
+}
+function resetToDefaults() {
+  if (confirm('Bütün dəyişikliklər silinəcək. Davam etmək istəyirsiniz?')) {
+    localStorage.removeItem('cn_posts');
+    sidebarFilter = 'all'; sidebarCat = '';
+    renderAll();
+    toast('Varsayılan məqalələr bərpa edildi', 'success');
+  }
+}
+
+// ── UI helpers ──
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = (type==='success'?'✅ ':'❌ ') + msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function showTab(tab) {
+  document.getElementById('tabPosts').style.display = tab==='posts' ? '' : 'none';
+  document.getElementById('tabNew').style.display   = tab==='new'   ? '' : 'none';
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  if (tab==='new') {
+    buildForm(document.getElementById('inlineForm'), null);
+  }
+}
+function filterSidebar(f) {
+  sidebarFilter = f; sidebarCat = '';
+  showTab('posts');
+  document.getElementById('tableTitle').textContent = f==='published' ? 'Yayımlanmış Məqalələr' : 'Qaralama Məqalələr';
+  renderTable();
+}
+function filterCat(cat) {
+  sidebarCat = cat; sidebarFilter = 'all';
+  showTab('posts');
+  document.getElementById('tableTitle').textContent = cat + ' Məqalələri';
+  renderTable();
+}
+
+// ── Stats ──
+function updateStats() {
+  const posts = getPosts();
+  const pub   = posts.filter(p=>p.status==='published').length;
+  const draft = posts.filter(p=>p.status==='draft').length;
+  const cats  = new Set(posts.map(p=>p.category)).size;
+  document.getElementById('statTotal').textContent = posts.length;
+  document.getElementById('statPub').textContent   = pub;
+  document.getElementById('statDraft').textContent = draft;
+  document.getElementById('statCats').textContent  = cats;
+  document.getElementById('sideCountAll').textContent   = posts.length;
+  document.getElementById('sideCountPub').textContent   = pub;
+  document.getElementById('sideCountDraft').textContent = draft;
+}
+
+// ── Table ──
+function renderTable() {
+  const q = (document.getElementById('adminSearch')?.value||'').toLowerCase();
+  let posts = getPosts();
+  if (sidebarFilter === 'published') posts = posts.filter(p=>p.status==='published');
+  if (sidebarFilter === 'draft')     posts = posts.filter(p=>p.status==='draft');
+  if (sidebarCat)                    posts = posts.filter(p=>p.category===sidebarCat);
+  if (q) posts = posts.filter(p=>p.title.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
+
+  document.getElementById('tableHeading').textContent = `Məqalələr (${posts.length})`;
+
+  const tbody = document.getElementById('postsTbody');
+  if (!posts.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:#94a3b8">Məqalə tapılmadı</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = posts.map(p => `
+    <tr>
+      <td>
+        <div class="post-title-cell">
+          <div class="post-thumb-mini" style="background:${p.bg||BG_MAP[p.emoji]||'#f8fafc'}">${p.emoji}</div>
+          <div>
+            <h4>${p.title}</h4>
+            <span>${p.readTime||'5 dəq'} oxuma</span>
+          </div>
+        </div>
+      </td>
+      <td><span style="background:#f1f5f9;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;color:#475569">${p.category}</span></td>
+      <td style="font-size:13px;color:#64748b">${p.author}</td>
+      <td style="font-size:13px;color:#94a3b8;white-space:nowrap">${p.date}</td>
+      <td><span class="status-badge ${p.status==='published'?'status-pub':'status-draft'}">${p.status==='published'?'✅ Yayımlanmış':'📄 Qaralama'}</span></td>
+      <td>
+        <div class="action-btns">
+          <button class="action-btn btn-edit" onclick="openModal(${p.id})">✏️ Redaktə</button>
+          <button class="action-btn btn-view" onclick="toggleStatus(${p.id})">${p.status==='published'?'⬇️ Qaralama':'✅ Yayımla'}</button>
+          <button class="action-btn btn-del" onclick="openDel(${p.id})">🗑</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── Form builder ──
+function buildForm(container, post) {
+  const sel = (emoji) => post?.emoji===emoji ? 'selected' : '';
+  container.innerHTML = `
+    <div class="form-field">
+      <label>Başlıq *</label>
+      <input type="text" id="fTitle" placeholder="Məqalə başlığı..." value="${post?.title||''}">
+    </div>
+    <div class="form-row-2">
+      <div class="form-field">
+        <label>Kateqoriya *</label>
+        <select id="fCat">
+          ${CATS.map(c=>`<option value="${c}" ${post?.category===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Müəllif</label>
+        <input type="text" id="fAuthor" placeholder="Müəllif adı" value="${post?.author||''}">
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-field">
+        <label>Tarix</label>
+        <input type="text" id="fDate" placeholder="15 Aprel 2025" value="${post?.date||new Date().toLocaleDateString('az-AZ',{day:'numeric',month:'long',year:'numeric'})}">
+      </div>
+      <div class="form-field">
+        <label>Oxuma vaxtı</label>
+        <input type="text" id="fRead" placeholder="5 dəq" value="${post?.readTime||'5 dəq'}">
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Emoji / Öncizgə</label>
+      <div class="emoji-picker" id="emojiPicker">
+        ${EMOJIS.map(e=>`<div class="emoji-opt ${sel(e)}" onclick="pickEmoji(this,'${e}')" data-emoji="${e}">${e}</div>`).join('')}
+      </div>
+      <input type="hidden" id="fEmoji" value="${post?.emoji||'💡'}">
+    </div>
+    <div class="form-field">
+      <label>Qısa Xülasə *</label>
+      <textarea id="fExcerpt" placeholder="Məqalənin qısa xülasəsi (kart görünüşündə göstərilir)..." style="min-height:80px">${post?.excerpt||''}</textarea>
+    </div>
+    <div class="form-field">
+      <label>Məqalə Mətni *</label>
+      <textarea id="fContent" placeholder="Məqalənin tam mətni buraya yazın...">${post?.content||''}</textarea>
+    </div>
+  `;
+  // Mark selected emoji
+  const cur = post?.emoji||'💡';
+  container.querySelectorAll('.emoji-opt').forEach(el => {
+    if (el.dataset.emoji === cur) el.classList.add('selected');
+  });
+}
+
+function pickEmoji(el, emoji) {
+  document.querySelectorAll('.emoji-opt').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('fEmoji').value = emoji;
+}
+
+function collectForm() {
+  const emoji = document.getElementById('fEmoji').value || '💡';
+  return {
+    title:    document.getElementById('fTitle').value.trim(),
+    category: document.getElementById('fCat').value,
+    author:   document.getElementById('fAuthor').value.trim() || 'Codigma Academy',
+    date:     document.getElementById('fDate').value.trim(),
+    readTime: document.getElementById('fRead').value.trim() || '5 dəq',
+    emoji,
+    bg:       BG_MAP[emoji] || '#f8fafc',
+    excerpt:  document.getElementById('fExcerpt').value.trim(),
+    content:  document.getElementById('fContent').value.trim(),
+  };
+}
+
+// ── Modal (edit) ──
+function openModal(id) {
+  const posts = getPosts();
+  const post  = id ? posts.find(p=>p.id===id) : null;
+  editingId   = id || null;
+  document.getElementById('modalTitle').textContent = id ? 'Məqaləni Redaktə Et' : 'Yeni Məqalə';
+  buildForm(document.getElementById('modalBody'), post);
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); editingId=null; }
+function closeModalOutside(e) { if (e.target===document.getElementById('modalOverlay')) closeModal(); }
+
+function saveModal(status) {
+  const data = collectForm();
+  if (!data.title || !data.excerpt) { toast('Başlıq və xülasə mütləqdir!','error'); return; }
+  const posts = getPosts();
+  if (editingId) {
+    const idx = posts.findIndex(p=>p.id===editingId);
+    if (idx>-1) posts[idx] = { ...posts[idx], ...data, status };
+  } else {
+    posts.unshift({ id: Date.now(), ...data, status });
+  }
+  savePosts(posts);
+  closeModal();
+  renderAll();
+  toast(editingId ? 'Məqalə yeniləndi' : 'Məqalə yaradıldı', 'success');
+}
+
+// ── Inline form (New tab) ──
+function saveInlineForm(status) {
+  const data = collectForm();
+  if (!data.title || !data.excerpt) { toast('Başlıq və xülasə mütləqdir!','error'); return; }
+  const posts = getPosts();
+  posts.unshift({ id: Date.now(), ...data, status });
+  savePosts(posts);
+  showTab('posts');
+  renderAll();
+  toast('Məqalə yaradıldı!', 'success');
+}
+
+// ── Delete ──
+function openDel(id) {
+  deletingId = id;
+  const post = getPosts().find(p=>p.id===id);
+  document.getElementById('delPostTitle').textContent = post?.title || '';
+  document.getElementById('delOverlay').classList.add('open');
+}
+function closeDel() { document.getElementById('delOverlay').classList.remove('open'); deletingId=null; }
+function closeDelOutside(e) { if (e.target===document.getElementById('delOverlay')) closeDel(); }
+function confirmDelete() {
+  if (!deletingId) return;
+  const posts = getPosts().filter(p=>p.id!==deletingId);
+  savePosts(posts);
+  closeDel();
+  renderAll();
+  toast('Məqalə silindi','success');
+}
+
+// ── Toggle status ──
+function toggleStatus(id) {
+  const posts = getPosts();
+  const post  = posts.find(p=>p.id===id);
+  if (post) post.status = post.status==='published' ? 'draft' : 'published';
+  savePosts(posts);
+  renderAll();
+  toast(`Status dəyişdirildi: ${post.status==='published'?'Yayımlandı':'Qaralama'}`, 'success');
+}
+
+// ── Render all ──
+function renderAll() {
+  updateStats();
+  renderTable();
+}
+
+renderAll();
+</script>
+</body>
+</html>
