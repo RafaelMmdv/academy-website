@@ -8,6 +8,8 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .nav-links a:hover { color: #2563eb; }
 .nav-cta { background: #2563eb; color: #fff; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; }
 
+.course-logo{ style="width: 120px;"}
+
 /* Mobile Menu Button */
 .mobile-menu-btn { 
   display: none; 
