@@ -8,6 +8,9 @@ body {
 }
  
 a { text-decoration: none; }
+
+.course-logo{ style="width: 120px;"}
+
  
 /* ============================================================
    NAVIGATION
