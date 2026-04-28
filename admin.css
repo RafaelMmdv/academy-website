@@ -9,7 +9,7 @@ body {
  
 a { text-decoration: none; }
 
-.course-logo{ style="width: 120px;"}
+.course-logo{ width: 120px; }
 
  
 /* ============================================================

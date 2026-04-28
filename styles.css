@@ -8,7 +8,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .nav-links a:hover { color: #2563eb; }
 .nav-cta { background: #2563eb; color: #fff; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; }
 
-.course-logo{ style="width: 120px;"}
+.course-logo{ width: 120px; }
 
 /* Mobile Menu Button */
 .mobile-menu-btn { 
@@ -658,7 +658,7 @@ footer { background: #020617; padding: 64px 48px 32px; }
   
   /* Navigation */
   nav { padding: 0 20px; height: 64px; flex-wrap: nowrap; }
-  .logo img { width: 70px !important; }
+  .logo img { width: 85px !important; }
   .nav-links { 
     position: fixed; 
     top: 64px; 
@@ -1000,7 +1000,7 @@ footer { background: #020617; padding: 64px 48px 32px; }
 
 @media (max-width: 479px) {
   nav { padding: 0 16px; }
-  .logo img { width: 60px !important; }
+  .logo img { width: 85px !important; }
   /*.nav-links { display: none; }*/
   .nav-cta { display: none; }
   
