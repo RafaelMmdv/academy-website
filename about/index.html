@@ -123,25 +123,5 @@
   </div>
 </footer>
 
-<script>
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-
-if (mobileMenuBtn) {
-  mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    mobileMenuBtn.classList.toggle('active');
-  });
-
-  // Close mobile menu when link is clicked
-  const navItems = navLinks.querySelectorAll('a');
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      mobileMenuBtn.classList.remove('active');
-    });
-  });
-}
-</script>
+<script src="../script.js"></script>
 </body></html>

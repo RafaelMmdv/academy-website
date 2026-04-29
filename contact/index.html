@@ -3,18 +3,7 @@
 <link rel="stylesheet" href="../styles.css">
     <link rel="icon" type="image/x-icon" href="../images/codigma.svg">
 
-<script>
-function selectChip(el){
-  document.querySelectorAll('.t-chip').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function submitForm(){
-  const btn=document.querySelector('.submit-btn');
-  btn.textContent='✅ Göndərildi!';
-  btn.style.background='#059669';
-  setTimeout(()=>{btn.textContent='Göndər';btn.style.background='#2563eb'},3000);
-}
-</script>
+
 </head><body>
 
 <nav>
@@ -172,25 +161,5 @@ function submitForm(){
   </div>
 </footer>
 
-<script>
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-
-if (mobileMenuBtn) {
-  mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    mobileMenuBtn.classList.toggle('active');
-  });
-
-  // Close mobile menu when link is clicked
-  const navItems = navLinks.querySelectorAll('a');
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      mobileMenuBtn.classList.remove('active');
-    });
-  });
-}
-</script>
+<script src="../script.js"></script>
 </body></html>
