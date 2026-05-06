@@ -103,3 +103,21 @@ function submitForm() {
     btn.style.background = '#2563eb';
   }, 3000);
 }
+// Course storage functions - available on all pages
+const DEFAULT_COURSES = [
+  { id:1, title:"Full-Stack Web Development", level:"Başlanğıc → Orta", duration:"6 ay", price:"1,200", description:"HTML/CSS, JS, React, Node.js, PostgreSQL. Tam stack developer ol, portfolio hazırla.", emoji:"🌐", badge:"Ən Populyar" },
+  { id:2, title:"Python & Data Science", level:"Başlanğıc → İrəli", duration:"5 ay", price:"1,100", description:"Python, Pandas, NumPy, scikit-learn, ML əsasları. Data analyst ya da ML engineer ol.", emoji:"🐍", badge:"" },
+  { id:3, title:"Cloud & DevOps", level:"Orta → İrəli", duration:"4 ay", price:"1,300", description:"AWS, Docker, Kubernetes, CI/CD. Bulud infrastrukturu qur, AWS sertifikatı al.", emoji:"☁️", badge:"" },
+  { id:4, title:"Mobil Tətbiq (React Native)", level:"Başlanğıc → Orta", duration:"4 ay", price:"950", description:"iOS & Android üçün cross-platform tətbiq inkişaf etdir. App Store-da öz tətbiqin.", emoji:"📱", badge:"" },
+  { id:5, title:"Kibertəhlükəsizlik", level:"Başlanğıc → Orta", duration:"5 ay", price:"1,150", description:"Etik hacking, penetrasyon testləri, network security. CompTIA Security+ hazırlığı.", emoji:"🛡️", badge:"" },
+  { id:6, title:"Backend & Verilənlər Bazası", level:"Başlanğıc → Orta", duration:"4 ay", price:"1,000", description:"SQL, PostgreSQL, MongoDB, REST API, mikroservislər. Güclü backend mühəndisi ol.", emoji:"🗄️", badge:"" }
+];
+
+function getCourses() {
+  const s = localStorage.getItem('cn_courses');
+  return s ? JSON.parse(s) : JSON.parse(JSON.stringify(DEFAULT_COURSES));
+}
+
+function saveCourses(courses) {
+  localStorage.setItem('cn_courses', JSON.stringify(courses));
+}

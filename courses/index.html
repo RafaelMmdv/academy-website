@@ -49,92 +49,7 @@
 <div class="sec">
   <div class="sec-label">Bütün Kurslar</div>
   <h2 class="sec-title">Hər Səviyyə üçün Proqram</h2>
-  <div class="courses-grid-2">
- 
-    <div class="course-big cb1">
-      <div class="course-thumb">🌐</div>
-      <div class="course-info">
-        <div class="course-tags"><span class="ctag t-blue">Başlanğıc → Orta</span><span class="ctag t-green">Ən Populyar</span></div>
-        <h3>Full-Stack Web Development</h3>
-        <p>HTML/CSS, JS, React, Node.js, PostgreSQL. Tam stack developer ol, portfolio hazırla.</p>
-        <div class="course-meta"><span>📅 6 ay</span><span>🕐 Həftədə 12 saat</span><span>👥 Canlı dərslər</span></div>
-        <div class="course-footer">
-          <span class="price">₼ 1,200</span>
-          <button class="enroll-btn" onclick="openEnroll('Full-Stack Web Development','🌐','#eff6ff','6 ay · ₼ 1,200')">Qeydiyyat →</button>
-        </div>
-      </div>
-    </div>
- 
-    <div class="course-big cb2">
-      <div class="course-thumb">🐍</div>
-      <div class="course-info">
-        <div class="course-tags"><span class="ctag t-green">Başlanğıc → İrəli</span></div>
-        <h3>Python & Data Science</h3>
-        <p>Python, Pandas, NumPy, scikit-learn, ML əsasları. Data analyst ya da ML engineer ol.</p>
-        <div class="course-meta"><span>📅 5 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
-        <div class="course-footer">
-          <span class="price">₼ 1,100</span>
-          <button class="enroll-btn" onclick="openEnroll('Python & Data Science','🐍','#f0fdf4','5 ay · ₼ 1,100')">Qeydiyyat →</button>
-        </div>
-      </div>
-    </div>
- 
-    <div class="course-big cb3">
-      <div class="course-thumb">☁️</div>
-      <div class="course-info">
-        <div class="course-tags"><span class="ctag t-purple">Orta → İrəli</span></div>
-        <h3>Cloud & DevOps</h3>
-        <p>AWS, Docker, Kubernetes, CI/CD. Bulud infrastrukturu qur, AWS sertifikatı al.</p>
-        <div class="course-meta"><span>📅 4 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
-        <div class="course-footer">
-          <span class="price">₼ 1,300</span>
-          <button class="enroll-btn" onclick="openEnroll('Cloud & DevOps','☁️','#eff6ff','4 ay · ₼ 1,300')">Qeydiyyat →</button>
-        </div>
-      </div>
-    </div>
- 
-    <div class="course-big cb4">
-      <div class="course-thumb">📱</div>
-      <div class="course-info">
-        <div class="course-tags"><span class="ctag t-orange">Başlanğıc → Orta</span></div>
-        <h3>Mobil Tətbiq (React Native)</h3>
-        <p>iOS & Android üçün cross-platform tətbiq inkişaf etdir. App Store-da öz tətbiqin.</p>
-        <div class="course-meta"><span>📅 4 ay</span><span>🕐 Həftədə 8 saat</span><span>👥 Canlı dərslər</span></div>
-        <div class="course-footer">
-          <span class="price">₼ 950</span>
-          <button class="enroll-btn" onclick="openEnroll('Mobil Tətbiq (React Native)','📱','#fff7ed','4 ay · ₼ 950')">Qeydiyyat →</button>
-        </div>
-      </div>
-    </div>
- 
-    <div class="course-big cb5">
-      <div class="course-thumb">🛡️</div>
-      <div class="course-info">
-        <div class="course-tags"><span class="ctag t-red">Başlanğıc → Orta</span></div>
-        <h3>Kibertəhlükəsizlik</h3>
-        <p>Etik hacking, penetrasyon testləri, network security. CompTIA Security+ hazırlığı.</p>
-        <div class="course-meta"><span>📅 5 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
-        <div class="course-footer">
-          <span class="price">₼ 1,150</span>
-          <button class="enroll-btn" onclick="openEnroll('Kibertəhlükəsizlik','🛡️','#fef2f2','5 ay · ₼ 1,150')">Qeydiyyat →</button>
-        </div>
-      </div>
-    </div>
- 
-    <div class="course-big cb6">
-      <div class="course-thumb">🗄️</div>
-      <div class="course-info">
-        <div class="course-tags"><span class="ctag t-teal">Başlanğıc → Orta</span></div>
-        <h3>Backend & Verilənlər Bazası</h3>
-        <p>SQL, PostgreSQL, MongoDB, REST API, mikroservislər. Güclü backend mühəndisi ol.</p>
-        <div class="course-meta"><span>📅 4 ay</span><span>🕐 Həftədə 10 saat</span><span>👥 Canlı dərslər</span></div>
-        <div class="course-footer">
-          <span class="price">₼ 1,000</span>
-          <button class="enroll-btn" onclick="openEnroll('Backend & Verilənlər Bazası','🗄️','#f0fdfa','4 ay · ₼ 1,000')">Qeydiyyat →</button>
-        </div>
-      </div>
-    </div>
- 
+  <div class="courses-grid-2" id="coursesGrid">
   </div>
 </div>
  
@@ -264,6 +179,33 @@
 <script src="../script.js"></script>
 
 <script>
+// Render courses from localStorage or defaults
+function renderCoursesGrid() {
+  const courses = getCourses();
+  const grid = document.getElementById('coursesGrid');
+  
+  const colors = ['#eff6ff', '#f0fdf4', '#eff6ff', '#fff7ed', '#fef2f2', '#f0fdfa'];
+  
+  grid.innerHTML = courses.map((c, i) => `
+    <div class="course-big" style="background: linear-gradient(135deg, ${colors[i % colors.length]} 0%, #fff 100%);">
+      <div class="course-thumb">${c.image ? `<img src="${c.image}" style="width:100%;height:100%;object-fit:cover">` : c.emoji}</div>
+      <div class="course-info">
+        <div class="course-tags"><span class="ctag" style="background:#f1f5f9;color:#475569">${c.level}</span>${c.badge ? `<span class="ctag" style="background:#fef9c3;color:#ca8a04">${c.badge}</span>` : ''}</div>
+        <h3>${c.title}</h3>
+        <p>${c.description}</p>
+        <div class="course-meta"><span>📅 ${c.duration}</span><span>👥 Canlı dərslər</span></div>
+        <div class="course-footer">
+          <span class="price">₼ ${c.price}</span>
+          <button class="enroll-btn" onclick="openEnroll('${c.title.replace(/'/g, "\\'")}','${c.emoji}','${colors[i % colors.length]}','${c.duration} · ₼ ${c.price}')">Qeydiyyat →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Render on page load
+renderCoursesGrid();
+
 // Filter tabs
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
