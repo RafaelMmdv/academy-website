@@ -366,7 +366,7 @@ function renderTable() {
     <tr>
       <td>
         <div class="post-title-cell">
-          <div class="post-thumb-mini" style="background:${p.bg||BG_MAP[p.emoji]||'#f8fafc'}">${p.emoji}</div>
+          <div class="post-thumb-mini" style="background:${p.bg||BG_MAP[p.emoji]||'#f8fafc'};overflow:hidden">${p.image ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover">` : p.emoji}</div>
           <div>
             <h4>${p.title}</h4>
             <span>${p.readTime||'5 dəq'} oxuma</span>
@@ -419,11 +419,9 @@ function buildForm(container, post) {
       </div>
     </div>
     <div class="form-field">
-      <label>Emoji / Öncizgə</label>
-      <div class="emoji-picker" id="emojiPicker">
-        ${EMOJIS.map(e=>`<div class="emoji-opt ${sel(e)}" onclick="pickEmoji(this,'${e}')" data-emoji="${e}">${e}</div>`).join('')}
-      </div>
-      <input type="hidden" id="fEmoji" value="${post?.emoji||'💡'}">
+      <label>Şəkil (JPG/PNG)</label>
+      <input type="file" id="fImage" accept="image/*" style="cursor:pointer">
+      ${post?.image ? `<div style="margin-top:8px"><img id="fImagePreview" src="${post.image}" style="max-width:140px;border-radius:8px;border:1px solid #e6e6e6"></div><button type="button" class="btn-cancel" onclick="removePostImage()" style="margin-top:8px">Şəkli Sil</button>` : `<div style="margin-top:8px"><img id="fImagePreview" style="display:none;max-width:140px;border-radius:8px;border:1px solid #e6e6e6"></div>`}
     </div>
     <div class="form-field">
       <label>Qısa Xülasə *</label>
@@ -434,11 +432,6 @@ function buildForm(container, post) {
       <textarea id="fContent" placeholder="Məqalənin tam mətni buraya yazın...">${post?.content||''}</textarea>
     </div>
   `;
-  // Mark selected emoji
-  const cur = post?.emoji||'💡';
-  container.querySelectorAll('.emoji-opt').forEach(el => {
-    if (el.dataset.emoji === cur) el.classList.add('selected');
-  });
 }
 
 function pickEmoji(el, emoji) {
@@ -447,19 +440,69 @@ function pickEmoji(el, emoji) {
   document.getElementById('fEmoji').value = emoji;
 }
 
-function collectForm() {
-  const emoji = document.getElementById('fEmoji').value || '💡';
-  return {
-    title:    document.getElementById('fTitle').value.trim(),
-    category: document.getElementById('fCat').value,
-    author:   document.getElementById('fAuthor').value.trim() || 'Codigma Academy',
-    date:     document.getElementById('fDate').value.trim(),
-    readTime: document.getElementById('fRead').value.trim() || '5 dəq',
-    emoji,
-    bg:       BG_MAP[emoji] || '#f8fafc',
-    excerpt:  document.getElementById('fExcerpt').value.trim(),
-    content:  document.getElementById('fContent').value.trim(),
+function previewBlogImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    const preview = document.getElementById('fImagePreview');
+    if (preview) {
+      preview.src = evt.target.result;
+      preview.style.display = 'block';
+    }
   };
+  reader.readAsDataURL(file);
+}
+
+function removePostImage() {
+  document.getElementById('fImage').value = '';
+  const preview = document.getElementById('fImagePreview');
+  if (preview) {
+    preview.style.display = 'none';
+    preview.src = '';
+  }
+}
+
+function collectForm() {
+  return new Promise(resolve => {
+    const imageInput = document.getElementById('fImage');
+    let imageData = '';
+    
+    if (imageInput?.files?.[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imageData = e.target.result; // base64
+        const emoji = document.getElementById('fEmoji')?.value || '💡';
+        resolve({
+          title:    document.getElementById('fTitle').value.trim(),
+          category: document.getElementById('fCat').value,
+          author:   document.getElementById('fAuthor').value.trim() || 'Codigma Academy',
+          date:     document.getElementById('fDate').value.trim(),
+          readTime: document.getElementById('fRead').value.trim() || '5 dəq',
+          emoji,
+          bg:       BG_MAP[emoji] || '#f8fafc',
+          excerpt:  document.getElementById('fExcerpt').value.trim(),
+          content:  document.getElementById('fContent').value.trim(),
+          image:    imageData
+        });
+      };
+      reader.readAsDataURL(imageInput.files[0]);
+    } else {
+      const emoji = document.getElementById('fEmoji')?.value || '💡';
+      resolve({
+        title:    document.getElementById('fTitle').value.trim(),
+        category: document.getElementById('fCat').value,
+        author:   document.getElementById('fAuthor').value.trim() || 'Codigma Academy',
+        date:     document.getElementById('fDate').value.trim(),
+        readTime: document.getElementById('fRead').value.trim() || '5 dəq',
+        emoji,
+        bg:       BG_MAP[emoji] || '#f8fafc',
+        excerpt:  document.getElementById('fExcerpt').value.trim(),
+        content:  document.getElementById('fContent').value.trim(),
+        image:    ''
+      });
+    }
+  });
 }
 
 // ── Modal (edit) ──
@@ -469,20 +512,32 @@ function openModal(id) {
   editingId   = id || null;
   document.getElementById('modalTitle').textContent = id ? 'Məqaləni Redaktə Et' : 'Yeni Məqalə';
   buildForm(document.getElementById('modalBody'), post);
+  // Wire image preview handler
+  const imageInput = document.getElementById('fImage');
+  if (imageInput) {
+    imageInput.addEventListener('change', previewBlogImage);
+  }
   document.getElementById('modalOverlay').classList.add('open');
 }
 function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); editingId=null; }
 function closeModalOutside(e) { if (e.target===document.getElementById('modalOverlay')) closeModal(); }
 
-function saveModal(status) {
-  const data = collectForm();
+async function saveModal(status) {
+  const data = await collectForm();
   if (!data.title || !data.excerpt) { toast('Başlıq və xülasə mütləqdir!','error'); return; }
   const posts = getPosts();
   if (editingId) {
     const idx = posts.findIndex(p=>p.id===editingId);
-    if (idx>-1) posts[idx] = { ...posts[idx], ...data, status };
+    if (idx>-1) {
+      const existing = posts[idx];
+      const updated = { ...existing, ...data, status };
+      if (!data.image) updated.image = existing.image || '';
+      posts[idx] = updated;
+    }
   } else {
-    posts.unshift({ id: Date.now(), ...data, status });
+    const newPost = { id: Date.now(), ...data, status };
+    if (!newPost.image) delete newPost.image;
+    posts.unshift(newPost);
   }
   savePosts(posts);
   closeModal();
@@ -491,11 +546,13 @@ function saveModal(status) {
 }
 
 // ── Inline form (New tab) ──
-function saveInlineForm(status) {
-  const data = collectForm();
+async function saveInlineForm(status) {
+  const data = await collectForm();
   if (!data.title || !data.excerpt) { toast('Başlıq və xülasə mütləqdir!','error'); return; }
   const posts = getPosts();
-  posts.unshift({ id: Date.now(), ...data, status });
+  const newPost = { id: Date.now(), ...data, status };
+  if (!newPost.image) delete newPost.image;
+  posts.unshift(newPost);
   savePosts(posts);
   showTab('posts');
   renderAll();
